@@ -1,4 +1,4 @@
-import { Application, Assets, Sprite } from 'pixi.js'
+import { Application, Assets, Container, Sprite } from 'pixi.js'
 
 const app = new Application({
 	view: document.getElementById("pixi-canvas") as HTMLCanvasElement,
@@ -38,27 +38,21 @@ window.dispatchEvent(new Event("resize"));
 
 
 Assets.add("myFrog", "./frog.png");
-Assets.add("Hat", "./frogHat.png");
+Assets.add("frogHat", "./frogHat2.png");
 
 
 Assets.load(["myFrog"]).then(()=>{
 	const frog: Sprite = Sprite.from("myFrog");
+	const hat: Sprite = Sprite.from("frogHat");
 
-	console.log("Hola Mundo", frog.width, frog.height);
+	hat.position.set(0,-100);
 
-	//clampy.anchor.set(0.5);
+	const frogWithHat: Container = new Container(); 
 	
-	frog.x = 50;
-	frog.y = 50;
-	
-	frog.scale.x = 0.7;
-	frog.scale.y = 0.7;
+	frogWithHat.addChild(frog);
+	frogWithHat.addChild(hat);
 
-	const hat: Sprite = Sprite.from("Hat");
-
-	app.stage.addChild(hat);
-	app.stage.addChild(frog);
-
+	app.stage.addChild(frogWithHat);
 });
 
 
