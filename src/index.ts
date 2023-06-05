@@ -1,6 +1,6 @@
 import { Application, Assets, Container, Sprite } from 'pixi.js'
 
-const app = new Application({
+const app = new Application({ //Set background
 	view: document.getElementById("pixi-canvas") as HTMLCanvasElement,
 	resolution: window.devicePixelRatio || 1,
 	autoDensity: true,
@@ -9,7 +9,7 @@ const app = new Application({
 	height: 400
 });
 
-window.addEventListener("resize", ()=>{
+window.addEventListener("resize", ()=>{ //Config scale backgroung
 	console.log("resized!");
 	const scaleX = window.innerWidth / app.screen.width;
 	const scaleY = window.innerHeight / app.screen.height;
@@ -37,22 +37,35 @@ window.dispatchEvent(new Event("resize"));
 
 
 
-Assets.add("myFrog", "./frog.png");
+Assets.add("myFrog", "./frog.png");  //Add files
 Assets.add("frogHat", "./frogHat2.png");
 
 
 Assets.load(["myFrog"]).then(()=>{
-	const frog: Sprite = Sprite.from("myFrog");
+	const frog: Sprite = Sprite.from("myFrog"); //Create Sprites
 	const hat: Sprite = Sprite.from("frogHat");
 
 	hat.position.set(0,-100);
+	hat.scale.set(0.3);
 
-	const frogWithHat: Container = new Container(); 
+	const frogWithHat: Container = new Container(); //Create Container
 	
-	frogWithHat.addChild(frog);
+	frogWithHat.addChild(frog); //Add Sprites to Container
 	frogWithHat.addChild(hat);
 
-	app.stage.addChild(frogWithHat);
+	frogWithHat.scale.set(0.8); //Set Container scale
+	frogWithHat.x = 200; //Set Container position
+	frogWithHat.y = 300; 
+
+	console.log(hat.parent.toGlobal(hat.position)); //Know hat and frog position in display
+	console.log(frog.parent.toGlobal(frog.position));
+
+		/**const aux = hat.parent.toLocal(new Point(150,200));
+		hat.position.x = aux.x;
+		hat.position.y = aux.y;  
+		*/  //Put a Sprite in a selected point 
+
+	app.stage.addChild(frogWithHat); //Shows on display
 });
 
 
