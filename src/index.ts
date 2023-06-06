@@ -41,12 +41,12 @@ Assets.add("myFrog", "./frog.png");  //Add files
 Assets.add("frogHat", "./frogHat2.png");
 
 
-Assets.load(["myFrog"]).then(()=>{
+Assets.load(["myFrog", "frogHat"]).then(()=>{
 	const frog: Sprite = Sprite.from("myFrog"); //Create Sprites
 	const hat: Sprite = Sprite.from("frogHat");
 
-	hat.position.set(0,-100);
-	hat.scale.set(0.3);
+	hat.position.set(130,8);
+	hat.scale.set(0.08);
 
 	const frogWithHat: Container = new Container(); //Create Container
 	
@@ -54,8 +54,8 @@ Assets.load(["myFrog"]).then(()=>{
 	frogWithHat.addChild(hat);
 
 	frogWithHat.scale.set(0.8); //Set Container scale
-	frogWithHat.x = 200; //Set Container position
-	frogWithHat.y = 300; 
+	frogWithHat.x = 100; //Set Container position
+	frogWithHat.y = 150;
 
 	console.log(hat.parent.toGlobal(hat.position)); //Know hat and frog position in display
 	console.log(frog.parent.toGlobal(frog.position));
